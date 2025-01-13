@@ -1,27 +1,20 @@
 class Solution {
 public:
     int minimumLength(string s) {
-        map<char, int> memo;
-
-        for (char c : s) 
-        {
-            memo[c]++;
+        vector<int> charFrequency(26, 0);
+        int totalLength = 0;
+        for (char currentChar : s) {
+            charFrequency[currentChar - 'a']++;
         }
-
-        int ans = 0;
-
-        for (auto &pair : memo) 
-        {
-            while (pair.second >= 3)
-            {
-                pair.second -= 2;
+        for (int frequency : charFrequency) {
+            if (frequency == 0) continue;
+            if (frequency % 2 == 0) {
+                totalLength += 2;
+            } else {
+                totalLength += 1;
             }
         }
-        for (auto &pair : memo)
-        {
-            ans += pair.second;
-        }
-        return ans;
+        return totalLength;
     }
     
 };
